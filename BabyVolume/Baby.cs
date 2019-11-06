@@ -42,7 +42,7 @@ namespace BabyVolume
             return (value < min) ? min : (value > max) ? max : value;
         }
 
-        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e) // allows dragging baby from anywhere on it's form
         {
             if (e.Button == MouseButtons.Left)
             {
@@ -51,7 +51,7 @@ namespace BabyVolume
             }
         }
 
-        private static float getHighestVol()
+        private static float getHighestVol() // finds process with the highest volume
         {
             if (sessmgr == null)
                 return 0;
@@ -83,10 +83,10 @@ namespace BabyVolume
             }
         }
 
-        private void pollTimer_Tick(object sender, EventArgs e)
+        private void pollTimer_Tick(object sender, EventArgs e) // polls for highest volume and then updates the baby's face accordingly
         {
             float highest = getHighestVol();
-            highest *= (thresh/100);
+            highest *= (thresh/100); // calculate based on sensitivity
             int babyIndex = (int)(highest * (babyFaces.Length - 1));
             if (babyIndex > babyFaces.Length - 1)
                 babyIndex = babyFaces.Length - 1;
@@ -97,13 +97,13 @@ namespace BabyVolume
         {
             new Thread(() =>
             {
-                sessmgr = GetDefaultAudioSessionManager2(DataFlow.Render);
+                sessmgr = GetDefaultAudioSessionManager2(DataFlow.Render); // get audio manager
             }).Start();
         }
 
         private void Baby_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Up)
+            if (e.KeyCode == Keys.Up) // up arrow, increase sensitivity
             {
                 TextTimeoutTimer.Stop();
                 TextTimeoutTimer.Start();
@@ -112,7 +112,7 @@ namespace BabyVolume
                 thresh = Clamp(thresh,50, 200);
                 VolText.Text = "Sensitivity: " + ((int)thresh)+"%";
             }
-            if (e.KeyCode == Keys.Down)
+            if (e.KeyCode == Keys.Down) // down arrow, decrease sensitivity
             {
                 TextTimeoutTimer.Stop();
                 TextTimeoutTimer.Start();
@@ -120,7 +120,7 @@ namespace BabyVolume
                 thresh -= 10f;
                 thresh = Clamp(thresh, 50, 200);
                 VolText.Text = "Sensitivity: " + ((int)thresh) + "%";
-            }else if (e.KeyCode == Keys.Space)
+            }else if (e.KeyCode == Keys.Space) // space key, show credits
             {
                 TextTimeoutTimer.Stop();
                 TextTimeoutTimer.Start();
