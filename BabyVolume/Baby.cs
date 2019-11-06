@@ -17,15 +17,15 @@ namespace BabyVolume
     {
         static Image[] babyFaces = new Image[] { Resources._00, Resources._01 , Resources._02 , Resources._03 ,
             Resources._04, Resources._05, Resources._06, Resources._07, Resources._08, Resources._09,Resources._10,
-        Resources._11,Resources._12,Resources._13,Resources._14,Resources._15,Resources._16,Resources._17};
+        Resources._11,Resources._12,Resources._13,Resources._14,Resources._15,Resources._16,Resources._17}; // array of the baby faces
 
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
 
-        static AudioSessionManager2 sessmgr;
-        static AudioSessionEnumerator sessenum;
+        static AudioSessionManager2 sessmgr; // session manager
+        static AudioSessionEnumerator sessenum; // session number
 
-        float thresh = 100;
+        float thresh = 100; // sensitivity
 
 
         [System.Runtime.InteropServices.DllImport("user32.dll")]
